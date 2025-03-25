@@ -8,7 +8,12 @@ namespace Algorithms_and_Complexities
 {
     class Sort
     {
-        private static List<int> MergeSort(List<int> unsorted)
+        public enum SortOrder
+        {
+            Ascending,
+            Descending
+        }
+        public static List<int> MergeSort(List<int> unsorted, SortOrder order = SortOrder.Ascending)
         {
             if (unsorted.Count <= 1)
                 return unsorted;
@@ -25,12 +30,12 @@ namespace Algorithms_and_Complexities
             {
                 right.Add(unsorted[i]);
             }
-            left = MergeSort(left);
-            right = MergeSort(right);
-            return Merge(left, right);
+            left = MergeSort(left, order);
+            right = MergeSort(right, order);
+            return Merge(left, right, order);
         }
 
-        private static List<int> Merge(List<int> left, List<int> right)
+        private static List<int> Merge(List<int> left, List<int> right, SortOrder order)
         {
             List<int> result = new List<int>();
 
@@ -38,26 +43,27 @@ namespace Algorithms_and_Complexities
             {
                 if (left.Count > 0 && right.Count > 0)
                 {
-                    if (left.First() <= right.First())
+                    if ((order == SortOrder.Ascending && left.First() <= right.First()) ||
+                        (order == SortOrder.Descending && left.First() >= right.First()))
                     {
                         result.Add(left.First());
-                        left.Remove(left.First());
+                        left.RemoveAt(0);
                     }
                     else
                     {
                         result.Add(right.First());
-                        right.Remove(right.First());
+                        right.RemoveAt(0);
                     }
                 }
                 else if (left.Count > 0)
                 {
                     result.Add(left.First());
-                    left.Remove(left.First());
+                    left.RemoveAt(0);
                 }
                 else if (right.Count > 0)
                 {
                     result.Add(right.First());
-                    right.Remove(right.First());
+                    right.RemoveAt(0);
                 }
             }
             return result;

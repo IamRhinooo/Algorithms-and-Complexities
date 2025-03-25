@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,19 +9,15 @@ namespace Algorithms_and_Complexities
 {
     class Stocks
     {
-        public static string[] share1;
-        public static string[] share2;
-        public static string[] share3;
+        public static List<int> Share1 { get; private set; }
+        public static List<int> Share2 { get; private set; }
+        public static List<int> Share3 { get; private set; }
 
         static Stocks()
         {
-            share1 = File.ReadAllLines("share_1_256.txt");
-            share2 = File.ReadAllLines("share_2_256.txt");
-            share3 = File.ReadAllLines("share_3_256.txt");
-
-            Convert.ToInt32(share1[0]);
-            Convert.ToInt32(share2[0]);
-            Convert.ToInt32(share3[0]);
+            Share1 = File.ReadAllLines("share_1_256.txt").Select(int.Parse).ToList();
+            Share2 = File.ReadAllLines("share_2_256.txt").Select(int.Parse).ToList();
+            Share3 = File.ReadAllLines("share_3_256.txt").Select(int.Parse).ToList();
         }
     }
 }

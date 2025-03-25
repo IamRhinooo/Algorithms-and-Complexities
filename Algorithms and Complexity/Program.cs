@@ -10,22 +10,39 @@ namespace Algorithms_and_Complexities
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("The share 1 stocks are:");
-            foreach (var line in Stocks.share1)
-            {
-                Console.WriteLine(line);
-            }
+            var share1_ascending = Sort.MergeSort(Stocks.Share1, Sort.SortOrder.Ascending);
+            var share1_descending = Sort.MergeSort(Stocks.Share1, Sort.SortOrder.Descending);
 
-            Console.WriteLine("The share 2 stocks are:");
-            foreach (var line in Stocks.share2)
-            {
-                Console.WriteLine(line);
-            }
+            var share2_ascending = Sort.MergeSort(Stocks.Share2, Sort.SortOrder.Ascending);
+            var share2_descending = Sort.MergeSort(Stocks.Share2, Sort.SortOrder.Descending);
 
-            Console.WriteLine("The share 3 stocks are:");
-            foreach (var line in Stocks.share3)
+            var share3_ascending = Sort.MergeSort(Stocks.Share3, Sort.SortOrder.Ascending);
+            var share3_descending = Sort.MergeSort(Stocks.Share3, Sort.SortOrder.Descending);
+
+            Console.WriteLine("The share 1 stocks in ascending order are:");
+            DisplaySortedStocks(share1_ascending);
+
+            Console.WriteLine("The share 1 stocks in descending order are:");
+            DisplaySortedStocks(share1_descending);
+
+            Console.WriteLine("The share 2 stocks in ascending order are:");
+            DisplaySortedStocks(share2_ascending);
+
+            Console.WriteLine("The share 2 stocks in descending order are:");
+            DisplaySortedStocks(share2_descending);
+
+            Console.WriteLine("The share 3 stocks in ascending order are:");
+            DisplaySortedStocks(share3_ascending);
+
+            Console.WriteLine("The share 3 stocks in descending order are:");
+            DisplaySortedStocks(share3_descending);
+        }
+
+        static void DisplaySortedStocks(List<int> stocks)
+        {
+            foreach (var stock in stocks)
             {
-                Console.WriteLine(line);
+                Console.WriteLine(stock);
             }
         }
     }
