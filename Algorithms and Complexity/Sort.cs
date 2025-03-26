@@ -6,67 +6,80 @@ using System.Threading.Tasks;
 
 namespace Algorithms_and_Complexities
 {
-    class Sort
+    class MergeSort
     {
         public enum SortOrder
         {
             Ascending,
             Descending
         }
-        public static List<int> MergeSort(List<int> unsorted, SortOrder order = SortOrder.Ascending)
+
+        public static int[] MergingSort(int[] unsorted, SortOrder order = SortOrder.Ascending)
         {
-            if (unsorted.Count <= 1)
+            if (unsorted.Length <= 1)
                 return unsorted;
 
-            List<int> left = new List<int>();
-            List<int> right = new List<int>();
+            int middle = unsorted.Length / 2;
+            int[] left = new int[middle];
+            int[] right = new int[unsorted.Length - middle];
 
-            int middle = unsorted.Count / 2;
-            for (int i = 0; i < middle; i++)
-            {
-                left.Add(unsorted[i]);
-            }
-            for (int i = middle; i < unsorted.Count; i++)
-            {
-                right.Add(unsorted[i]);
-            }
-            left = MergeSort(left, order);
-            right = MergeSort(right, order);
+            Array.Copy(unsorted, 0, left, 0, middle);
+            Array.Copy(unsorted, middle, right, 0, unsorted.Length - middle);
+
+            left = MergingSort(left, order);
+            right = MergingSort(right, order);
             return Merge(left, right, order);
         }
 
-        private static List<int> Merge(List<int> left, List<int> right, SortOrder order)
+        private static int[] Merge(int[] left, int[] right, SortOrder order)
         {
-            List<int> result = new List<int>();
+            int[] result = new int[left.Length + right.Length];
+            int leftIndex = 0, rightIndex = 0, resultIndex = 0;
 
-            while(left.Count > 0 || right.Count > 0)
+            while (leftIndex < left.Length && rightIndex < right.Length)
             {
-                if (left.Count > 0 && right.Count > 0)
+                if ((order == SortOrder.Ascending && left[leftIndex] <= right[rightIndex]) ||
+                    (order == SortOrder.Descending && left[leftIndex] >= right[rightIndex]))
                 {
-                    if ((order == SortOrder.Ascending && left.First() <= right.First()) ||
-                        (order == SortOrder.Descending && left.First() >= right.First()))
-                    {
-                        result.Add(left.First());
-                        left.RemoveAt(0);
-                    }
-                    else
-                    {
-                        result.Add(right.First());
-                        right.RemoveAt(0);
-                    }
+                    result[resultIndex++] = left[leftIndex++];
                 }
-                else if (left.Count > 0)
+                else
                 {
-                    result.Add(left.First());
-                    left.RemoveAt(0);
-                }
-                else if (right.Count > 0)
-                {
-                    result.Add(right.First());
-                    right.RemoveAt(0);
+                    result[resultIndex++] = right[rightIndex++];
                 }
             }
+
+            while (leftIndex < left.Length)
+            {
+                result[resultIndex++] = left[leftIndex++];
+            }
+
+            while (rightIndex < right.Length)
+            {
+                result[resultIndex++] = right[rightIndex++];
+            }
+
             return result;
+        }
+    }
+
+    class Bubblesort
+    {
+        public static void BubblingSort(int[] array)
+        {
+            int n = array.Length;
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    if (array[j] > array[j + 1])
+                    {
+                        int temp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
+                    }
+                }
+            }
         }
     }
 }
