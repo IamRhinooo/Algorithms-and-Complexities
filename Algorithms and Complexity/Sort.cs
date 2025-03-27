@@ -65,14 +65,21 @@ namespace Algorithms_and_Complexities
 
     class Bubblesort
     {
-        public static void BubblingSort(int[] array)
+        public enum SortOrder
+        {
+            Ascending,
+            Descending
+        }
+
+        public static void BubblingSort(int[] array, SortOrder order = SortOrder.Ascending)
         {
             int n = array.Length;
             for (int i = 0; i < n - 1; i++)
             {
                 for (int j = 0; j < n - i - 1; j++)
                 {
-                    if (array[j] > array[j + 1])
+                    bool condition = order == SortOrder.Ascending ? array[j] > array[j + 1] : array[j] < array[j + 1];
+                    if (condition)
                     {
                         int temp = array[j];
                         array[j] = array[j + 1];
