@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Algorithms_and_Complexities
 {
     class Stocks
+    // Places the arrays within a class and makes the arrays public
     {
         public static int[] Share1 { get; private set; }
         public static int[] Share2 { get; private set; }
@@ -18,6 +19,7 @@ namespace Algorithms_and_Complexities
         public static int[] Share6 { get; private set; }
 
         static Stocks()
+        // Reads the stocks and turns them into arrays 
         {
             Share1 = File.ReadAllLines("share_1_256.txt").Select(int.Parse).ToArray();
             Share2 = File.ReadAllLines("share_2_256.txt").Select(int.Parse).ToArray();
