@@ -142,8 +142,9 @@ namespace Algorithms_and_Complexities
                             list = Stocks.Share6;
                             break;
                         case 13:
-                            display = false;
                             user = false;
+                            display = false;
+                            Environment.Exit(0);
                             break;
                         default:
                             Console.WriteLine("Invalid choice. Please try again.");
