@@ -6,10 +6,42 @@ using System.Text;
 using System.Threading.Tasks;
 
 /*
- * This program is designed to sort and search through stock data using merge sort and linear or binary search.
- * The user can choose which stock data to sort and search through, and the program will display the results.
- * The user can also choose the order in which the stock data is sorted and the algorithm used to search.
- */
+* Program Name: Algorithms and Complexities
+* Author: Reuben Hover
+* Date: 27/03/2025
+*
+* Description:
+* This program is designed to read stock exhange data from 6 different  
+* data files. The data is then sorted in ascending and descending order
+* and will be displayed to the user with the option of the order and 
+* what they would like to search for. They can also choose what search 
+* method they would like to use.
+*
+* Main Functionality:
+* - Reads stock exchange volume data from multiple text files.
+* - Sorts and displays the data in ascending and descending order.
+* - Displays every 10th (for smaller datasets) or 50th (for larger
+datasets) value after sorting.
+* - Searches for a user-defined value and returns its position(s).
+* - If the value is not found, provides the nearest value(s) and their
+position(s).
+* - Uses 2 main sorting algorithms (Bubble sort, Merge sort)
+* - Uses 2 main searching algorithms (Linear search, Binary search)
+*
+* Input Parameters:
+* - Input file(s) or path
+* - Ascending or descending order selection
+* - Searching algorithm selection 
+*
+* Expected Output:
+* - Sorted data with selected interval values displayed.
+* - Ascending and descending values.
+* - Binary and Linear search results.
+*
+* Implemented Algorithms:
+* - Sorting: Bubble Sort, Merge Sort 
+* - Searching: Linear Search, Binary Search
+*/
 
 namespace Algorithms_and_Complexities
 {
@@ -19,12 +51,14 @@ namespace Algorithms_and_Complexities
         {
             bool user = true;
 
+            // While loop to keep the program running until the user decides to exit
             while (user)
             {
                 bool display = true;
 
                 while (display)
                 {
+                    // Contains all the stock choices for the user to select from
                     Console.WriteLine("\nWhich of the following would you like to view: ");
                     Console.WriteLine("1 - Share 1 stocks in ascending order");
                     Console.WriteLine("2 - Share 1 stocks in descending order");
@@ -40,11 +74,13 @@ namespace Algorithms_and_Complexities
                     Console.WriteLine("12 - Share 6 stocks in descending order");
                     Console.WriteLine("13 - Exit");
 
+                    // Error handles for "Jeff" inputs
                     string strChoice = Console.ReadLine();
                     int.TryParse(strChoice, out int choice);
 
                     int[] list = new int[0];
 
+                    // Large choice of options for ascending and descending stocks lists
                     switch (choice)
                     {
                         case 1:
@@ -115,25 +151,34 @@ namespace Algorithms_and_Complexities
                             Console.WriteLine("Invalid choice. Please try again.");
                             continue;
                     }
-                    //DisplaySortedStocks(list);
+                    // Error handling for checking the original lists
+                    // DisplaySortedStocks(list);
 
+                    // Asks what searching algorithm the user would like to use
                     Console.WriteLine("What algorithm would you like to use?");
                     Console.WriteLine("1 - Linear Search\n2 - Binary Search");
+
+                    // Error handling for the searching algorithm
                     string strSearchChoice = Console.ReadLine();
                     int.TryParse(strSearchChoice, out int searchChoice);
 
+                    // Asks what number the user would like to search for
                     Console.WriteLine("What would you like to search for?: ");
                     string strSearch = Console.ReadLine();
                     int search = -1;
+
+                    // Error handling for the search input
                     try { search = int.Parse(strSearch); }
                     catch (FormatException) { Console.WriteLine("Invalid input. Please try again."); continue; }
 
                     int[] results = new int[0];
 
+                    // Links to Linear
                     if (searchChoice == 1)
                     {
                         results = Search.LinearSearch(list, search);
                     } 
+                    // Links to Binary
                     else if (searchChoice == 2)
                     {
                         results = Search.BinarySearch(list, search);
@@ -143,7 +188,7 @@ namespace Algorithms_and_Complexities
                         Console.WriteLine("Invalid choice. Please try again.");
                         continue;
                     }
-
+                    // If found then display the index
                     if (results.Length > 0)
                     {
                         Console.WriteLine("The stock was found at the following indices: ");
@@ -224,8 +269,8 @@ namespace Algorithms_and_Complexities
                 }
             }
         }
-        
 
+        // Displays the 10th stock for the first set of arrays
         static void DisplaySortedStocks(int[] stocks)
         {
             var TenthStock = new List<int>();
@@ -236,6 +281,7 @@ namespace Algorithms_and_Complexities
             Console.WriteLine(string.Join(", ", TenthStock));
         }
 
+        // Displays the 50th stock for the second set of arrays
         static void Display50thSortedStocks(int[] stocks)
         {
             var TenthStock = new List<int>();
