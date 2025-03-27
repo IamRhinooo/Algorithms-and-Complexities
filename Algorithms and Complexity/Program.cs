@@ -25,8 +25,6 @@ datasets) value after sorting.
 * - Searches for a user-defined value and returns its position(s).
 * - If the value is not found, provides the nearest value(s) and their
 position(s).
-* - Uses 2 main sorting algorithms (Bubble sort, Merge sort)
-* - Uses 2 main searching algorithms (Linear search, Binary search)
 *
 * Input Parameters:
 * - Input file(s) or path
@@ -177,7 +175,7 @@ namespace Algorithms_and_Complexities
                     if (searchChoice == 1)
                     {
                         results = Search.LinearSearch(list, search);
-                    } 
+                    }
                     // Links to Binary
                     else if (searchChoice == 2)
                     {
@@ -188,7 +186,7 @@ namespace Algorithms_and_Complexities
                         Console.WriteLine("Invalid choice. Please try again.");
                         continue;
                     }
-                    // If found then display the index
+                    // If > 0 then it has found a stock
                     if (results.Length > 0)
                     {
                         Console.WriteLine("The stock was found at the following indices: ");
@@ -196,24 +194,29 @@ namespace Algorithms_and_Complexities
                     }
                     else
                     {
+                        // If not found then it will search for the closest stock
                         int[] upperResults = new int[0];
                         int[] lowerResults = new int[0];
 
                         int Upper = search + 1;
                         int Lower = search - 1;
 
+                        // While loop to keep searching for the closest stock
                         while (upperResults.Length == 0 || lowerResults.Length == 0)
                         {
                             bool upperLimit = false;
                             bool lowerLimit = false;
 
+                            // If the stock is found then it will display the stock
                             upperResults = searchChoice == 0 ? Search.LinearSearch(list, Upper) : Search.BinarySearch(list, Upper);
 
+                            // If the stock is found then it will display the stock
                             lowerResults = searchChoice == 0 ? Search.LinearSearch(list, Lower) : Search.BinarySearch(list, Lower);
 
+                            // If the upper stock is found then it will display the stock
                             if (upperResults.Length > 0)
                             {
-                                Console.WriteLine("The closest stock found was: " +Upper + " at index: " +string.Join(", ", upperResults));
+                                Console.WriteLine("The closest stock found was: " + Upper + " at index: " + string.Join(", ", upperResults));
                             }
 
                             else
@@ -229,6 +232,7 @@ namespace Algorithms_and_Complexities
                                 }
                             }
 
+                            // If the lower stock is found it will check whether the upper stock is also found or not.
                             if (lowerResults.Length > 0)
                             {
                                 if (upperResults.Length > 0)
@@ -240,7 +244,7 @@ namespace Algorithms_and_Complexities
                                     Console.WriteLine("The closest stock found was: " + Lower + " at index: " + string.Join(", ", lowerResults));
                                 }
                             }
-
+                            // If found, it will break the loop
                             if (upperResults.Length > 0 || lowerResults.Length > 0)
                             {
                                 break;
@@ -258,7 +262,7 @@ namespace Algorithms_and_Complexities
                                     lowerLimit = true;
                                 }
                             }
-
+                            // If it is not found in the list.
                             if (upperLimit && lowerLimit)
                             {
                                 Console.WriteLine("The stock was not found in the list.");

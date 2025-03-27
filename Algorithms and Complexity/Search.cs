@@ -2,6 +2,7 @@
 {
     class Search
     {
+        // Linear Search 
         public static int[] LinearSearch(int[] list, int searchValue)
         {
             List<int> indexes = new List<int>();
@@ -12,6 +13,7 @@
             }
             return indexes.ToArray();
         }
+        // Binary search to search through the stocks list
         public static int[] BinarySearch(int[] list, int searchValue)
         {
             int[][] encodedList = BinaryEncoder(list);
@@ -49,6 +51,7 @@
             }
             return new int[0];
         }
+        // Binary encoder to encode the list for the binary search
         public static int[][] BinaryEncoder(int[] list)
         {
             int[][] binaryList = new int[list.Length][];

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Algorithms_and_Complexities
 {
+    // Merge Sort usage
     class MergeSort
     {
         public enum SortOrder
@@ -14,6 +15,7 @@ namespace Algorithms_and_Complexities
             Descending
         }
 
+        // Merge sort algorithm for sorting the stocks
         public static int[] MergingSort(int[] unsorted, SortOrder order = SortOrder.Ascending)
         {
             if (unsorted.Length <= 1)
@@ -31,6 +33,7 @@ namespace Algorithms_and_Complexities
             return Merge(left, right, order);
         }
 
+        // Sorts the array in ascending or descending order
         private static int[] Merge(int[] left, int[] right, SortOrder order)
         {
             int[] result = new int[left.Length + right.Length];
@@ -63,6 +66,7 @@ namespace Algorithms_and_Complexities
         }
     }
 
+    // Bubble Sort for sorting the stocks
     class Bubblesort
     {
         public enum SortOrder
@@ -71,6 +75,7 @@ namespace Algorithms_and_Complexities
             Descending
         }
 
+        // Sorts and orders into ascending and descending order
         public static void BubblingSort(int[] array, SortOrder order = SortOrder.Ascending)
         {
             int n = array.Length;
